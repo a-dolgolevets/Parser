@@ -16,6 +16,7 @@ namespace Parser.App.Logic
                 throw new FileNotFoundException("The specified file could not be found", filePath);
             }
 
+			// Parsing rules can be changed in the regex (for example to remove digits)
             var words = Regex.Split(File.ReadAllText(filePath), @"[^a-zA-Z0-9_']+");
             var usagesList = words.GroupBy(word => word).Select(grouped => new WordUsage(grouped.Key, grouped.Count()));
             Result = new ParseResult(usagesList);
